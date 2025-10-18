@@ -1,0 +1,46 @@
+{
+  "name": "modern-portfolio-website",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS",
+  "author": "Ocean <oceanocean1205@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ocean09102025/portfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "react",
+    "typescript",
+    "tailwind",
+    "vite",
+    "responsive",
+    "dark-mode"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext ts,tsx"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "classnames": "^2.5.1",
+    "lucide-react": "^0.460.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "3.4.13",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.0"
+  }
+}
