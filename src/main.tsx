@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
 import App from './App'
 import Home from './pages/Home'
@@ -11,21 +11,21 @@ import Education from './pages/Education'
 import Contact from './pages/Contact'
 import { ThemeProvider } from './contexts/ThemeContext'
 
-const router = createBrowserRouter([
-  { path: '/', element: <App />, children: [
-    { index: true, element: <Home /> },
-    { path: 'about', element: <About /> },
-    { path: 'projects', element: <Projects /> },
-    { path: 'skills', element: <Skills /> },
-    { path: 'education', element: <Education /> },
-    { path: 'contact', element: <Contact /> },
-  ]},
-])
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <HashRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="projects" element={<Projects />} />
+            <Route path="skills" element={<Skills />} />
+            <Route path="education" element={<Education />} />
+            <Route path="contact" element={<Contact />} />
+          </Route>
+        </Routes>
+      </HashRouter>
     </ThemeProvider>
   </React.StrictMode>,
 )
