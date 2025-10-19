@@ -1,6 +1,6 @@
-# 🚀 Modern Portfolio Website
+# 🚀 Ocean-Portfolio
 
-A beautiful, responsive portfolio website built with React, TypeScript, and Tailwind CSS. Features a stunning dark/light theme system, interactive animations, and a complete showcase of projects, skills, and achievements.
+Ocean's personal portfolio website built with React, TypeScript, and Tailwind CSS. Features a stunning dark/light theme system, interactive animations, and a complete showcase of projects, skills, and achievements.
 
 ![Portfolio Preview](https://img.shields.io/badge/React-18.3-blue?logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue?logo=typescript)
