@@ -71,8 +71,8 @@ A beautiful, responsive portfolio website built with React, TypeScript, and Tail
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/portfolio.git
-cd portfolio
+git clone https://github.com/ocean09102025/Ocean-Portfolio.git
+cd Ocean-Portfolio
 ```
 
 2. **Install dependencies**
@@ -110,33 +110,61 @@ npm run preview
 ## 📁 Project Structure
 
 ```
-my-portfolio-template/
-├── public/                 # Static assets
-│   └── favicon.svg        # Site favicon
-├── src/
-│   ├── components/        # Reusable components
-│   │   ├── Card.tsx      # Card component
-│   │   ├── Navbar.tsx    # Navigation bar with theme toggle
-│   │   └── Footer.tsx    # Footer component
-│   ├── contexts/         # React contexts
-│   │   └── ThemeContext.tsx  # Theme management (dark/light)
-│   ├── pages/            # Page components
-│   │   ├── Home.tsx      # Landing page
-│   │   ├── About.tsx     # About page with timeline
-│   │   ├── Projects.tsx  # Projects showcase
-│   │   ├── Skills.tsx    # Skills section
-│   │   ├── Education.tsx # Education details
-│   │   └── Contact.tsx   # Contact form
-│   ├── utils/            # Utility functions
-│   │   └── emailService.ts  # Email sending service
-│   ├── App.tsx           # Root component
-│   ├── main.tsx          # Entry point
-│   └── index.css         # Global styles & theme overrides
-├── index.html            # HTML template
-├── package.json          # Dependencies & scripts
-├── tailwind.config.js    # Tailwind configuration
-├── vite.config.ts        # Vite configuration
-└── tsconfig.json         # TypeScript configuration
+Ocean-Portfolio/
+├── .npmrc                      # NPM configuration
+├── docs/                       # Documentation files
+│   ├── api/                    # API documentation
+│   │   └── README.md
+│   ├── components/             # Component documentation
+│   │   ├── Card.md
+│   │   ├── Footer.md
+│   │   ├── GradesDashboard.md
+│   │   └── Navbar.md
+│   ├── contexts/               # Context documentation
+│   │   └── ThemeContext.md
+│   ├── pages/                  # Page documentation
+│   │   ├── Education.md
+│   │   └── Home.md
+│   ├── utils/                  # Utility documentation
+│   │   └── emailService.md
+│   ├── deployment.md           # Deployment guide
+│   └── README.md               # Docs index
+├── public/                     # Static assets
+│   ├── _redirects              # Routing redirects
+│   └── favicon.svg             # Site favicon
+├── src/                        # Source code
+│   ├── components/             # Reusable components
+│   │   ├── Card.tsx            # Card component
+│   │   ├── Footer.tsx          # Footer component
+│   │   ├── GradesDashboard.tsx # Grades dashboard component
+│   │   └── Navbar.tsx          # Navigation bar with theme toggle
+│   ├── contexts/               # React contexts
+│   │   └── ThemeContext.tsx    # Theme management (dark/light)
+│   ├── pages/                  # Page components
+│   │   ├── About.tsx           # About page with timeline
+│   │   ├── Contact.tsx         # Contact form
+│   │   ├── Education.tsx       # Education details
+│   │   ├── Home.tsx            # Landing page
+│   │   ├── Projects.tsx        # Projects showcase
+│   │   └── Skills.tsx          # Skills section
+│   ├── utils/                  # Utility functions
+│   │   └── emailService.ts     # Email sending service
+│   ├── App.tsx                 # Root component
+│   ├── index.css               # Global styles & theme overrides
+│   └── main.tsx                # Entry point
+├── .gitignore                  # Git ignore rules
+├── index.html                  # HTML template
+├── LICENSE                     # MIT license
+├── package-lock.json           # Locked dependencies
+├── package.json                # Dependencies & scripts
+├── postcss.config.js           # PostCSS configuration
+├── README.md                   # Project documentation
+├── tailwind.config.js          # Tailwind CSS configuration
+├── tsconfig.app.json           # TypeScript app configuration
+├── tsconfig.json               # TypeScript configuration
+├── tsconfig.node.json          # TypeScript node configuration
+├── vercel.json                 # Vercel deployment configuration
+└── vite.config.ts              # Vite build configuration
 ```
 
 ## 🎨 Customization Guide
@@ -222,6 +250,12 @@ theme: {
 - Breakpoints: sm (640px), md (768px), lg (1024px), xl (1280px)
 - Optimized for all screen sizes
 
+### **Routing**
+- HashRouter for client-side navigation
+- Vercel rewrites configuration for seamless routing
+- Fallback redirects for SPA support
+- No 404 errors on direct URL access
+
 ## 🚀 Deployment
 
 ### **Vercel** (Recommended)
@@ -238,7 +272,7 @@ theme: {
 1. Install `gh-pages`: `npm install -D gh-pages`
 2. Add to `package.json`:
    ```json
-   "homepage": "https://yourusername.github.io/portfolio",
+   "homepage": "https://ocean09102025.github.io/Ocean-Portfolio",
    "scripts": {
      "predeploy": "npm run build",
      "deploy": "gh-pages -d dist"
