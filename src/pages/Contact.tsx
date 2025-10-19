@@ -7,14 +7,20 @@ export default function Contact() {
   const [isVisible, setIsVisible] = useState(false)
   const [activeTab, setActiveTab] = useState(0)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
+  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [emailCopied, setEmailCopied] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    honeypot: '', // Hidden field for bot detection
+    captcha: '' // Simple math captcha
   })
+  const [captchaQuestion, setCaptchaQuestion] = useState({ num1: 0, num2: 0, answer: 0 })
+  const [formErrors, setFormErrors] = useState<string[]>([])
+  const [lastSubmissionTime, setLastSubmissionTime] = useState<number>(0)
+  const [submissionCount, setSubmissionCount] = useState<number>(0)
 
   const tabs = [
     { id: 0, label: 'Contact Info', icon: '📞' },
@@ -99,10 +105,72 @@ export default function Contact() {
     
     window.addEventListener('mousemove', handleMouseMove)
     
+    // Generate initial captcha
+    generateCaptcha()
+    
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
     }
   }, [])
+
+  // Security Functions
+  const generateCaptcha = () => {
+    const num1 = Math.floor(Math.random() * 10) + 1
+    const num2 = Math.floor(Math.random() * 10) + 1
+    setCaptchaQuestion({ num1, num2, answer: num1 + num2 })
+  }
+
+  const validateInput = (input: string, type: string): boolean => {
+    switch (type) {
+      case 'name':
+        return /^[a-zA-Z\s]{2,50}$/.test(input.trim())
+      case 'email':
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.trim())
+      case 'subject':
+        return input.trim().length >= 5 && input.trim().length <= 100
+      case 'message':
+        return input.trim().length >= 10 && input.trim().length <= 1000
+      case 'captcha':
+        return parseInt(input) === captchaQuestion.answer
+      default:
+        return true
+    }
+  }
+
+  const sanitizeInput = (input: string): string => {
+    return input
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove script tags
+      .replace(/javascript:/gi, '') // Remove javascript: protocols
+      .replace(/on\w+\s*=/gi, '') // Remove event handlers
+      .trim()
+  }
+
+  const checkSpamContent = (message: string): boolean => {
+    const spamKeywords = [
+      'viagra', 'casino', 'lottery', 'winner', 'congratulations',
+      'click here', 'free money', 'urgent', 'act now', 'limited time',
+      'make money', 'work from home', 'get rich', 'bitcoin', 'crypto'
+    ]
+    const lowerMessage = message.toLowerCase()
+    return spamKeywords.some(keyword => lowerMessage.includes(keyword))
+  }
+
+  const checkRateLimit = (): boolean => {
+    const now = Date.now()
+    const timeSinceLastSubmission = now - lastSubmissionTime
+    const maxSubmissionsPerMinute = 2
+    const timeWindow = 60000 // 1 minute
+
+    if (timeSinceLastSubmission < timeWindow && submissionCount >= maxSubmissionsPerMinute) {
+      return false
+    }
+
+    if (timeSinceLastSubmission >= timeWindow) {
+      setSubmissionCount(0)
+    }
+
+    return true
+  }
 
   const handleInputChange = (e) => {
     setFormData({
@@ -123,11 +191,70 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setFormErrors([])
     setFormStatus('sending')
     
     try {
+      // Security Checks
+      const errors: string[] = []
+
+      // 1. Check honeypot (should be empty)
+      if (formData.honeypot !== '') {
+        errors.push('Bot detected - submission blocked')
+      }
+
+      // 2. Rate limiting
+      if (!checkRateLimit()) {
+        errors.push('Too many submissions. Please wait a moment before trying again.')
+      }
+
+      // 3. Validate all inputs
+      if (!validateInput(formData.name, 'name')) {
+        errors.push('Name must be 2-50 characters and contain only letters and spaces')
+      }
+      if (!validateInput(formData.email, 'email')) {
+        errors.push('Please enter a valid email address')
+      }
+      if (!validateInput(formData.subject, 'subject')) {
+        errors.push('Subject must be 5-100 characters')
+      }
+      if (!validateInput(formData.message, 'message')) {
+        errors.push('Message must be 10-1000 characters')
+      }
+      if (!validateInput(formData.captcha, 'captcha')) {
+        errors.push('Please solve the math problem correctly')
+      }
+
+      // 4. Check for spam content
+      if (checkSpamContent(formData.message)) {
+        errors.push('Message contains suspicious content and cannot be sent')
+      }
+
+      // 5. Check for suspicious patterns
+      if (formData.message.includes('http://') || formData.message.includes('https://')) {
+        errors.push('Links are not allowed in messages for security reasons')
+      }
+
+      if (errors.length > 0) {
+        setFormErrors(errors)
+        setFormStatus('error')
+        return
+      }
+
+      // Sanitize inputs
+      const sanitizedData = {
+        name: sanitizeInput(formData.name),
+        email: sanitizeInput(formData.email),
+        subject: sanitizeInput(formData.subject),
+        message: sanitizeInput(formData.message)
+      }
+
+      // Update rate limiting
+      setLastSubmissionTime(Date.now())
+      setSubmissionCount(prev => prev + 1)
+
       // Use the email service
-      const result = await sendEmail(formData)
+      const result = await sendEmail(sanitizedData)
       
       if (result.success) {
         setFormStatus('sent')
@@ -135,8 +262,9 @@ export default function Contact() {
         
         // Reset form after delay
         setTimeout(() => {
-          setFormData({ name: '', email: '', subject: '', message: '' })
+          setFormData({ name: '', email: '', subject: '', message: '', honeypot: '', captcha: '' })
           setFormStatus('idle')
+          generateCaptcha() // Generate new captcha
         }, 3000)
       } else {
         throw new Error(result.message)
@@ -159,8 +287,9 @@ export default function Contact() {
       
       // Reset form after delay
       setTimeout(() => {
-        setFormData({ name: '', email: '', subject: '', message: '' })
+        setFormData({ name: '', email: '', subject: '', message: '', honeypot: '', captcha: '' })
         setFormStatus('idle')
+        generateCaptcha() // Generate new captcha
       }, 3000)
     }
   }
@@ -228,6 +357,12 @@ export default function Contact() {
           <div className="text-center space-y-2">
             <h3 className="text-2xl font-bold text-green-400">Send me a message</h3>
             <p className="text-zinc-400">I'll get back to you within 24 hours</p>
+            <div className="mt-4 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+              <p className="text-sm text-blue-300">
+                <span className="font-semibold">🔒 Security Notice:</span> This form includes anti-spam protection to ensure genuine communication. 
+                Your message will be validated before sending.
+              </p>
+            </div>
           </div>
           
           {formStatus === 'sent' ? (
@@ -247,6 +382,30 @@ export default function Contact() {
                   <strong>Check your inbox:</strong> You should receive a copy of this message at your email address.
                 </p>
               </div>
+            </div>
+          ) : formStatus === 'error' ? (
+            <div className="text-center space-y-4 py-8">
+              <div className="w-16 h-16 mx-auto bg-red-500/20 rounded-full flex items-center justify-center">
+                <span className="text-4xl">⚠️</span>
+              </div>
+              <h4 className="text-2xl font-bold text-red-400">Security Check Failed</h4>
+              <div className="space-y-2">
+                {formErrors.map((error, index) => (
+                  <p key={index} className="text-sm text-red-300 bg-red-500/10 p-2 rounded-lg">
+                    {error}
+                  </p>
+                ))}
+              </div>
+              <button
+                onClick={() => {
+                  setFormStatus('idle')
+                  setFormErrors([])
+                  generateCaptcha()
+                }}
+                className="mt-4 px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+              >
+                Try Again
+              </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -299,6 +458,57 @@ export default function Contact() {
                   className="w-full px-4 py-3 bg-zinc-800 border-2 border-zinc-700 rounded-xl text-zinc-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all duration-300 resize-none group-hover:border-zinc-600"
                   placeholder="Tell me about your project, opportunity, or just say hello!"
                 />
+              </div>
+
+              {/* Security Fields */}
+              {/* Honeypot field - hidden from users */}
+              <div style={{ display: 'none' }}>
+                <label htmlFor="honeypot">Leave this field empty</label>
+                <input
+                  type="text"
+                  id="honeypot"
+                  name="honeypot"
+                  value={formData.honeypot}
+                  onChange={handleInputChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
+              {/* CAPTCHA */}
+              <div className="group">
+                <label className="block text-sm font-medium text-zinc-300 mb-2">
+                  Security Check *
+                  <span className="text-xs text-zinc-500 ml-2">(Anti-spam protection)</span>
+                </label>
+                <div className="flex items-center gap-4">
+                  <div className="flex-1">
+                    <div className="bg-zinc-800 border-2 border-zinc-700 rounded-xl p-4 text-center">
+                      <p className="text-zinc-300 text-lg">
+                        What is {captchaQuestion.num1} + {captchaQuestion.num2}?
+                      </p>
+                    </div>
+                  </div>
+                  <div className="w-32">
+                    <input
+                      type="number"
+                      name="captcha"
+                      value={formData.captcha}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 bg-zinc-800 border-2 border-zinc-700 rounded-xl text-zinc-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all duration-300 text-center text-lg"
+                      placeholder="?"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={generateCaptcha}
+                    className="px-4 py-3 bg-zinc-700 text-zinc-300 rounded-xl hover:bg-zinc-600 transition-colors text-sm"
+                    title="Generate new question"
+                  >
+                    🔄
+                  </button>
+                </div>
               </div>
               <div className="space-y-3">
                 <button
