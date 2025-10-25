@@ -26,7 +26,7 @@ export default function Footer() {
               </svg>
             </a>
             <a 
-              href="https://www.linkedin.com/in/ocean09102025" 
+              href="https://www.linkedin.com/in/ocean-ocean" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-zinc-400 hover:text-white transition-colors duration-300"

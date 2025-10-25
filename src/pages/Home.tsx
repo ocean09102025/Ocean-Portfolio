@@ -152,7 +152,7 @@ export default function Home() {
               </a>
               <a 
                 className="btn btn-ghost group hover:scale-105 transition-all duration-300" 
-                href="https://www.linkedin.com/in/ocean09102025" 
+                href="https://www.linkedin.com/in/ocean-ocean" 
                 target="_blank"
               >
                 <svg className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">

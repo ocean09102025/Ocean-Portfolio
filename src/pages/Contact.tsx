@@ -42,12 +42,12 @@ export default function Contact() {
     },
     {
       type: 'LinkedIn',
-      value: 'linkedin.com/in/ocean09102025',
+      value: 'linkedin.com/in/ocean-ocean',
       icon: '💼',
       color: 'text-purple-400',
       bgColor: 'bg-purple-500/10',
       borderColor: 'border-purple-500/20',
-      href: 'https://www.linkedin.com/in/ocean09102025',
+      href: 'https://www.linkedin.com/in/ocean-ocean',
       description: 'Professional networking and opportunities'
     },
     {
@@ -66,7 +66,7 @@ export default function Contact() {
     {
       name: 'LinkedIn',
       icon: '💼',
-      url: 'https://www.linkedin.com/in/ocean09102025',
+      url: 'https://www.linkedin.com/in/ocean-ocean',
       color: 'from-blue-600 to-blue-700',
       description: 'Professional networking'
     },
@@ -777,7 +777,7 @@ export default function Contact() {
                 Send Email
               </a>
               <a 
-                href="https://www.linkedin.com/in/ocean09102025"
+                href="https://www.linkedin.com/in/ocean-ocean"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-ghost group hover:scale-105 transition-all duration-300"
