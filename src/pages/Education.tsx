@@ -161,7 +161,7 @@ export default function Education() {
           { label: 'High Distinctions', value: '10', icon: '🏆', color: 'text-yellow-400' },
           { label: 'Distinctions', value: '9', icon: '🥇', color: 'text-blue-400' },
           { label: 'Units Completed', value: '20', icon: '📚', color: 'text-green-400' },
-          { label: 'Average Mark', value: '80%', icon: '📊', color: 'text-purple-400' }
+          { label: 'Average Mark', value: '79%', icon: '📊', color: 'text-purple-400' }
         ].map((stat, index) => (
           <Card key={stat.label} className={`text-center group hover:scale-105 transition-all duration-300 delay-${index * 100}`}>
             <div className="space-y-2">
