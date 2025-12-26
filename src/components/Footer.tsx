@@ -37,7 +37,7 @@ export default function Footer() {
               </svg>
             </a>
             <a 
-              href="mailto:oceanocean1205@gmail.com"
+              href="mailto:oceanoceandataanalyst@gmail.com"
               className="text-zinc-400 hover:text-white transition-colors duration-300"
               aria-label="Email"
             >

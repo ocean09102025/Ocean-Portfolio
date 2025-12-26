@@ -18,6 +18,12 @@ export default function Education() {
   ]
 
   const subjects = [
+    // 2025 TRI-2 - Actual Grades
+    { code: 'SIT314', name: 'Software Architecture and Scalability for Internet-of-Things', mark: 87, grade: 'HD', year: '2025', semester: 'TRI-2', color: 'from-blue-500 to-cyan-500' },
+    { code: 'SIT320', name: 'Advanced Algorithms', mark: 80, grade: 'HD', year: '2025', semester: 'TRI-2', color: 'from-purple-500 to-pink-500' },
+    { code: 'SIT325', name: 'Advanced Network Security', mark: 90, grade: 'HD', year: '2025', semester: 'TRI-2', color: 'from-green-500 to-emerald-500' },
+    { code: 'SIT374', name: 'Team Project (A) - Project Management and Practices', mark: 87, grade: 'HD', year: '2025', semester: 'TRI-2', color: 'from-orange-500 to-red-500' },
+    
     // 2025 TRI-1 - Actual Grades
     { code: 'SIT215', name: 'Computational Intelligence', mark: 87, grade: 'HD', year: '2025', semester: 'TRI-1', color: 'from-green-500 to-emerald-500' },
     { code: 'SIT220', name: 'Data Wrangling', mark: 83, grade: 'HD', year: '2025', semester: 'TRI-1', color: 'from-blue-500 to-cyan-500' },
@@ -105,7 +111,7 @@ export default function Education() {
       description: 'Led database development for 60K+ products in Food Remedy API project',
       icon: '👑',
       color: 'bg-purple-500',
-      achievements: ['Database Lead role', '60K+ products processed', 'Team leadership experience']
+      achievements: ['8 HD grades in 2025', '60K+ products processed', 'Team leadership experience']
     },
     {
       year: '2026',
@@ -152,10 +158,10 @@ export default function Education() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'High Distinctions', value: '6', icon: '🏆', color: 'text-yellow-400' },
+          { label: 'High Distinctions', value: '10', icon: '🏆', color: 'text-yellow-400' },
           { label: 'Distinctions', value: '9', icon: '🥇', color: 'text-blue-400' },
-          { label: 'Units Completed', value: '16', icon: '📚', color: 'text-green-400' },
-          { label: 'Average Grade', value: '78', icon: '📊', color: 'text-purple-400' }
+          { label: 'Units Completed', value: '20', icon: '📚', color: 'text-green-400' },
+          { label: 'Average Mark', value: '80%', icon: '📊', color: 'text-purple-400' }
         ].map((stat, index) => (
           <Card key={stat.label} className={`text-center group hover:scale-105 transition-all duration-300 delay-${index * 100}`}>
             <div className="space-y-2">
@@ -240,7 +246,7 @@ export default function Education() {
             <div className="group hover:scale-105 transition-transform duration-300">
               <Card className="text-center p-6">
                 <div className="text-4xl mb-3">📖</div>
-                <div className="text-4xl font-bold text-blue-400 mb-2">12</div>
+                <div className="text-4xl font-bold text-blue-400 mb-2">20</div>
                 <div className="text-sm text-zinc-400">Subjects Completed</div>
               </Card>
             </div>
@@ -254,7 +260,7 @@ export default function Education() {
             <div className="group hover:scale-105 transition-transform duration-300">
               <Card className="text-center p-6">
                 <div className="text-4xl mb-3">🎯</div>
-                <div className="text-4xl font-bold text-yellow-400 mb-2">78</div>
+                <div className="text-4xl font-bold text-yellow-400 mb-2">80%</div>
                 <div className="text-sm text-zinc-400">Average Mark</div>
               </Card>
             </div>
@@ -418,7 +424,7 @@ export default function Education() {
           </div>
           <div className="flex items-center gap-2">
             <span className="text-2xl">🏆</span>
-            <span className="text-zinc-400">6 HD Grades</span>
+            <span className="text-zinc-400">10 HD Grades</span>
           </div>
         </div>
       </div>

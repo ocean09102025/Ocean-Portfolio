@@ -246,15 +246,17 @@ export default function GradesDashboard() {
       year: '2023',
       color: 'from-zinc-500 to-gray-500'
     },
-    // Current Enrolled Units (4 units you're working on)
+    // Recently Completed Units (T2 2025)
     {
       id: '17',
-      title: 'Software Architecture And Scalability',
+      title: 'Software Architecture and Scalability for Internet-of-Things',
       code: 'SIT314',
       credits: 15,
       progress: 100,
-      status: 'Enrolled',
+      status: 'Completed',
       expectedGrade: 'HD',
+      actualGrade: 'HD',
+      actualMark: 87,
       semester: 'T2 2025',
       year: '2025',
       color: 'from-blue-500 to-cyan-500'
@@ -265,8 +267,10 @@ export default function GradesDashboard() {
       code: 'SIT320',
       credits: 15,
       progress: 100,
-      status: 'Enrolled',
+      status: 'Completed',
       expectedGrade: 'HD',
+      actualGrade: 'HD',
+      actualMark: 80,
       semester: 'T2 2025',
       year: '2025',
       color: 'from-purple-500 to-pink-500'
@@ -277,20 +281,24 @@ export default function GradesDashboard() {
       code: 'SIT325',
       credits: 15,
       progress: 100,
-      status: 'Enrolled',
+      status: 'Completed',
       expectedGrade: 'HD',
+      actualGrade: 'HD',
+      actualMark: 90,
       semester: 'T2 2025',
       year: '2025',
       color: 'from-green-500 to-emerald-500'
     },
     {
       id: '20',
-      title: 'Capstone Team Project (A)',
-      code: 'SIT374/SIT764',
+      title: 'Team Project (A) - Project Management and Practices',
+      code: 'SIT374',
       credits: 15,
       progress: 100,
-      status: 'Enrolled',
+      status: 'Completed',
       expectedGrade: 'HD',
+      actualGrade: 'HD',
+      actualMark: 87,
       semester: 'T2 2025',
       year: '2025',
       color: 'from-orange-500 to-red-500'
@@ -303,16 +311,17 @@ export default function GradesDashboard() {
   return (
     <div className="space-y-8">
       {/* Enrolled Units Section */}
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-white">Enrolled Units</h2>
-          <div className="text-sm text-zinc-400">
-            {enrolledCourses.length} units enrolled
+      {enrolledCourses.length > 0 && (
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-white">Enrolled Units</h2>
+            <div className="text-sm text-zinc-400">
+              {enrolledCourses.length} units enrolled
+            </div>
           </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {enrolledCourses.map((course) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {enrolledCourses.map((course) => (
             <Card
               key={course.id}
               className={`relative transition-all duration-300 hover:scale-105 cursor-pointer ${selectedCourse === course.id
@@ -356,9 +365,10 @@ export default function GradesDashboard() {
                 </div>
               </div>
             </Card>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Completed Units Section */}
       <div className="space-y-6">
@@ -423,7 +433,7 @@ export default function GradesDashboard() {
 
       {/* Unit Statistics */}
       <Card>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
           <div className="text-center">
             <div className="text-3xl font-bold text-blue-400 mb-2">
               {courses.length}
@@ -447,6 +457,14 @@ export default function GradesDashboard() {
               {completedCourses.filter(c => c.actualGrade === 'HD').length}
             </div>
             <div className="text-sm text-zinc-400">HD Grades</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-cyan-400 mb-2">
+              {completedCourses.length > 0 && completedCourses.every(c => c.actualMark !== undefined)
+                ? Math.round(completedCourses.reduce((sum, c) => sum + (c.actualMark || 0), 0) / completedCourses.length)
+                : 'N/A'}
+            </div>
+            <div className="text-sm text-zinc-400">Avg Mark</div>
           </div>
         </div>
       </Card>

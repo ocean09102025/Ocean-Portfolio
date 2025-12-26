@@ -44,7 +44,7 @@ export default function About() {
   ]
 
   const achievements = [
-    { title: 'High Distinction Grades', count: 6, icon: '🏆', color: 'text-yellow-400', description: 'Consistent academic excellence' },
+    { title: 'High Distinction Grades', count: 10, icon: '🏆', color: 'text-yellow-400', description: 'Consistent academic excellence' },
     { title: 'Major Projects', count: 4, icon: '💻', color: 'text-blue-400', description: 'Hands-on technical experience' },
     { title: 'Technologies Mastered', count: 15, icon: '⚡', color: 'text-green-400', description: 'Versatile skill development', clickable: true },
     { title: 'Team Leadership', count: 1, icon: '👥', color: 'text-purple-400', description: 'Capstone project leadership' }
@@ -73,7 +73,7 @@ export default function About() {
       year: '2025',
       title: 'Advanced Mastery & Leadership',
       description: 'Led capstone project and mastered cutting-edge technologies',
-      details: 'Achieved triple HD grades in Computational Intelligence, Data Wrangling, and Machine Learning. Led Food Remedy API capstone project, managing database architecture for 60,000+ products and mentoring team members.',
+      details: 'Achieved multiple HD grades across both semesters including Computational Intelligence, Data Wrangling, Machine Learning, Software Architecture, Advanced Algorithms, Advanced Network Security, and Team Project. Led Food Remedy API capstone project, managing database architecture for 60,000+ products and mentoring team members.',
       icon: '👑',
       color: 'bg-purple-500',
       milestones: ['ML & AI HD', 'Data Engineering HD', 'Project Leadership']
@@ -333,16 +333,26 @@ export default function About() {
       <Card>
         <div className="space-y-4">
           <h3 className="text-xl font-semibold text-green-400">Academic Excellence</h3>
+          <div className="mb-4 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-zinc-300">Average Mark:</span>
+              <span className="text-lg font-bold text-green-400">80%</span>
+            </div>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <h4 className="font-medium text-zinc-200 mb-2">High Distinction Subjects</h4>
               <ul className="text-sm text-zinc-400 space-y-1">
                 <li>• Computational Intelligence</li>
                 <li>• Data Wrangling</li>
-                <li>• Cloud Computing</li>
-                <li>• Applied Algebra</li>
-                <li>• Discrete Mathematics</li>
                 <li>• Machine Learning</li>
+                <li>• Software Architecture & Scalability for IoT</li>
+                <li>• Advanced Algorithms</li>
+                <li>• Advanced Network Security</li>
+                <li>• Team Project (A) - Project Management</li>
+                <li>• Cloud Computing</li>
+                <li>• Applied Algebra & Statistics</li>
+                <li>• Discrete Mathematics</li>
               </ul>
             </div>
             <div>
@@ -656,7 +666,7 @@ export default function About() {
                   ×
                 </button>
               </div>
-              <p className="text-zinc-400 mt-2">15 technologies I've mastered through academic projects and self-learning</p>
+              <p className="text-zinc-400 mt-2">{technologies.length} technologies I've mastered through academic projects and self-learning</p>
             </div>
 
             <div className="p-6 overflow-y-auto max-h-[60vh]">
@@ -693,7 +703,7 @@ export default function About() {
             <div className="p-6 border-t border-zinc-700 bg-zinc-800/50">
               <div className="flex items-center justify-between">
                 <div className="text-sm text-zinc-400">
-                  Total: <span className="text-green-400 font-semibold">15 technologies</span> across multiple domains
+                  Total: <span className="text-green-400 font-semibold">{technologies.length} technologies</span> across multiple domains
                 </div>
                 <button
                   onClick={() => setShowTechnologies(false)}

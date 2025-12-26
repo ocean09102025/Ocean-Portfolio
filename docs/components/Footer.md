@@ -21,7 +21,7 @@ No external props - static footer content
 const socialLinks = [
   { name: 'GitHub', url: 'https://github.com/ocean09102025', icon: 'GitHub' },
   { name: 'LinkedIn', url: 'https://linkedin.com/in/ocean', icon: 'Linkedin' },
-  { name: 'Email', url: 'mailto:oceanocean1205@gmail.com', icon: 'Mail' }
+  { name: 'Email', url: 'mailto:oceanoceandataanalyst@gmail.com', icon: 'Mail' }
 ]
 ```
 

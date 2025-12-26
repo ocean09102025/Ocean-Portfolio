@@ -321,7 +321,7 @@ This project is open source and available under the [MIT License](LICENSE).
 **Ocean**
 - GitHub: [@ocean09102025](https://github.com/ocean09102025)
 - LinkedIn: [@ocean09102025](https://www.linkedin.com/in/ocean09102025)
-- Email: oceanocean1205@gmail.com
+- Email: oceanoceandataanalyst@gmail.com
 
 ## ⭐ Show Your Support
 

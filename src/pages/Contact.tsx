@@ -32,12 +32,12 @@ export default function Contact() {
   const contactMethods = [
     {
       type: 'Email',
-      value: 'oceanocean1205@gmail.com',
+      value: 'oceanoceandataanalyst@gmail.com',
       icon: '📧',
       color: 'text-blue-400',
       bgColor: 'bg-blue-500/10',
       borderColor: 'border-blue-500/20',
-      href: 'mailto:oceanocean1205@gmail.com',
+      href: 'mailto:oceanoceandataanalyst@gmail.com',
       description: 'Primary contact method - I check daily'
     },
     {
@@ -80,7 +80,7 @@ export default function Contact() {
     {
       name: 'Email',
       icon: '📧',
-      url: 'mailto:oceanocean1205@gmail.com',
+      url: 'mailto:oceanoceandataanalyst@gmail.com',
       color: 'from-red-600 to-red-700',
       description: 'Direct communication'
     }
@@ -181,7 +181,7 @@ export default function Contact() {
 
   const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText('oceanocean1205@gmail.com')
+      await navigator.clipboard.writeText('oceanoceandataanalyst@gmail.com')
       setEmailCopied(true)
       setTimeout(() => setEmailCopied(false), 2000)
     } catch (err) {
@@ -258,7 +258,7 @@ export default function Contact() {
       
       if (result.success) {
         setFormStatus('sent')
-        console.log('Email sent successfully to oceanocean1205@gmail.com')
+        console.log('Email sent successfully to oceanoceandataanalyst@gmail.com')
         
         // Reset form after delay
         setTimeout(() => {
@@ -280,7 +280,7 @@ export default function Contact() {
         subject: formData.subject,
         message: formData.message,
         timestamp: new Date().toISOString(),
-        target_email: 'oceanocean1205@gmail.com'
+        target_email: 'oceanoceandataanalyst@gmail.com'
       })
       
       setFormStatus('sent')
@@ -768,7 +768,7 @@ export default function Contact() {
             </div>
             <div className="flex flex-wrap justify-center gap-4">
               <a 
-                href="mailto:oceanocean1205@gmail.com"
+                href="mailto:oceanoceandataanalyst@gmail.com"
                 className="btn btn-primary group hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
               >
                 <svg className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -799,7 +799,7 @@ export default function Contact() {
                 View GitHub
               </a>
               <a 
-                href="mailto:oceanocean1205@gmail.com"
+                href="mailto:oceanoceandataanalyst@gmail.com"
                 className="btn btn-ghost group hover:scale-105 transition-all duration-300"
               >
                 <svg className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

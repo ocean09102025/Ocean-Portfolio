@@ -27,9 +27,9 @@ export default function Home() {
   ]
 
   const achievements = [
-    { icon: '🏆', title: 'Academic Excellence', value: '6 HD Grades', color: 'text-yellow-400' },
+    { icon: '🏆', title: 'Academic Excellence', value: '10 HD Grades', color: 'text-yellow-400' },
     { icon: '💻', title: 'Project Portfolio', value: '10 Projects', color: 'text-blue-400' },
-    { icon: '📚', title: 'Learning Journey', value: '12+ Subjects', color: 'text-green-400' },
+    { icon: '📚', title: 'Learning Journey', value: '20 Subjects', color: 'text-green-400' },
     { icon: '🚀', title: 'Graduation Countdown', value: '6 Months Left', color: 'text-purple-400' }
   ]
 
@@ -125,11 +125,11 @@ export default function Home() {
                   <div className="text-sm text-zinc-500">Projects</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-400">6</div>
+                  <div className="text-2xl font-bold text-green-400">10</div>
                   <div className="text-sm text-zinc-500">HD Grades</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-400">12+</div>
+                  <div className="text-2xl font-bold text-purple-400">20</div>
                   <div className="text-sm text-zinc-500">Subjects</div>
                 </div>
                 <div className="text-center">
@@ -197,7 +197,7 @@ export default function Home() {
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
-                      oceanocean1205@gmail.com
+                      oceanoceandataanalyst@gmail.com
                     </div>
                   </div>
                 </div>
@@ -220,7 +220,7 @@ export default function Home() {
                     <span className="text-lg">⭐</span>
           <div>
                       <div className="text-sm font-medium text-zinc-200">Academic Performance</div>
-                      <div className="text-xs text-zinc-400">6 High Distinctions • 78% Average</div>
+                      <div className="text-xs text-zinc-400">10 High Distinctions • 80% Average</div>
                     </div>
                   </div>
                 </div>
